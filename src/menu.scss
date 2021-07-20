@@ -1,0 +1,8 @@
+@use "base";
+
+.head{
+    background-color: base.$themeGray;
+    min-width: 250px;
+    width: 35%;
+    height: 250px;
+}
