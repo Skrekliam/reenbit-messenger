@@ -1,8 +1,26 @@
 @use "base";
 
-.head{
-    background-color: base.$themeGray;
-    min-width: 250px;
-    width: 35%;
-    height: 250px;
+.head {
+  background-color: base.$themeGray;
+  min-width: 250px;
+  width: 35%;
+//   height: 250px;
+  padding: 25px;
+
+  .head__avatarImg {
+    width: 100px;
+    border-radius: 50%;
+    margin-bottom: 25px;
+  }
+
+  .search {
+      input {
+        // margin:0 10%;
+        border: none;
+        border-radius: 20px;
+        padding: 10px;
+        width: 90%;
+        
+    }
+  }
 }
