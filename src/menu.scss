@@ -14,13 +14,35 @@
   }
 
   .search {
-      input {
-        // margin:0 10%;
-        border: none;
+
+    .input-group{
+      width: 100%;
+      margin-bottom: 10px;
+
+      span{
+        position: absolute;
+        padding: 8px 10px;
+        min-width: 50px;
         border-radius: 20px;
-        padding: 10px;
+        // text-align: center;
+      }
+
+      input{
         width: 90%;
-        
+        padding: 10px;
+        padding-left: 35px;
+        // text-align: center;
+        border:none;
+        border: 1px solid base.$themeBlue;
+        border-radius: 20px;
+
+      }
     }
+      
   }
+}
+.chats{
+    height: 100%;
+    width: 35%;
+    background-color: red;
 }

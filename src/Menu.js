@@ -6,10 +6,17 @@ function Menu() {
     <div>
       <div className="head">
         <div className="avatar">
-          <img src="./imgs/avatar.png" alt="Avatar" className="head__avatarImg"/>
+          <img
+            src="./imgs/avatar.png"
+            alt="Avatar"
+            className="head__avatarImg"
+          />
         </div>
         <div className="search">
-          <input type="text" placeholder="🔍 Search or start new chat" />
+          <div className="input-group">
+            <span className="icon">🔍 </span>
+            <input type="text" placeholder="Search or start new chat" />
+          </div>
         </div>
       </div>
 
