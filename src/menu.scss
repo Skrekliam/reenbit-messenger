@@ -55,6 +55,14 @@
     }
     
     .chat {
+      transition: .1s ease;
+      &:hover{
+        background-color: base.$themeGray;
+      }
+      
+      .time{
+        padding-right: 5px;
+      }
       .messageSection {
         display: flex;
         flex-direction: row;
@@ -63,6 +71,9 @@
           padding: 0 10px;
         }
         .text {
+          .message{
+            color: base.$themeDarkGray;
+          }
           p {
             margin: 0;
           }
