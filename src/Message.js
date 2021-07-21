@@ -1,12 +1,13 @@
-import React from 'react'
+import React from "react";
+import "./message.scss";
 
 function Message() {
-    return (
-        <div>
-        {/* chat avatar + name */}
-        {/* message */}
-        </div>
-    )
+  return (
+    <div className="messageBlock">
+      {/* chat avatar + name */}asd
+      {/* message */}
+    </div>
+  );
 }
 
-export default Message
+export default Message;

@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import Menu from './Menu';
 import Message from './Message';
 
