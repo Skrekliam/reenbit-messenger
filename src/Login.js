@@ -1,41 +1,57 @@
 import React, { useEffect, useState } from "react";
 import "./login.scss";
-import { auth } from "./firebase";
+import { auth, db } from "./firebase";
 import firebase from "firebase";
+import createMessages from "./CreateChats";
+
 
 function Login() {
   const handleLogin = (prov) => {
-    var provider = prov ==='google' ? new firebase.auth.GoogleAuthProvider(): new firebase.auth.FacebookAuthProvider();
+    var provider =
+      prov === "google"
+        ? new firebase.auth.GoogleAuthProvider()
+        : new firebase.auth.FacebookAuthProvider();
     firebase
       .auth()
       .signInWithPopup(provider)
       .then((result) => {
-        /** @type {firebase.auth.OAuthCredential} */
-        var credential = result.credential;
-
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        var token = credential.accessToken;
-        // The signed-in user info.
-        var user = result.user;
+        // createMessages(result.user)
         console.log(result);
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // The email of the user's account used.
-        var email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
-        var credential = error.credential;
-        console.log(error)
-        // ...
+        db.collection("users")
+          .doc(result.user.uid)
+          .get()
+          .then((docSnapshot) => {
+            if (!docSnapshot.exists) {
+              db.collection("users")
+                .doc(result.user.uid)
+                .set({
+                  photoULR: result.user.photoURL,
+                  name: result.user.displayName,
+                  email: result.user.email,
+                  chats: [],
+                })
+                .then(() => {
+                  
+                  console.log("Document successfully written!");
+                })
+                .catch((error) => {
+                  console.error("Error writing document: ", error);
+                });
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       });
   };
   return (
     <div className="login">
       <div className="box">
         <h1>You need to LogIn first</h1>
-        <div class="google-btn" onClick={() => handleLogin('google')}>
+        <div class="google-btn" onClick={() => handleLogin("google")}>
           <div class="google-icon-wrapper">
             <img
               class="google-icon"
@@ -46,7 +62,9 @@ function Login() {
             <b>Sign in with Google</b>
           </p>
         </div>
-        <button onClick={() => handleLogin('facebook')} class="fb connect">Sign in with Facebook</button>
+        <button onClick={() => handleLogin("facebook")} class="fb connect">
+          Sign in with Facebook
+        </button>
       </div>
     </div>
   );

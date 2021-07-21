@@ -4,6 +4,7 @@ import Login from "./Login";
 import Menu from "./Menu";
 import Message from "./Message";
 import { auth } from "./firebase";
+import createMessages from "./CreateChats";
 
 function App() {
   const [showMenu, setShowMenu] = useState(null);
@@ -46,6 +47,7 @@ function App() {
         <Login />
       ) : (
         <>
+        <button onClick={() => createMessages(user)}></button>
           <Menu user={user} toggleMenu={toggleMenu} />
 
           <Message user={user} toggleMenu={toggleMenu} />
