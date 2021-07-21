@@ -1,25 +1,27 @@
 @use "base";
 
-.head {
-  background-color: base.$themeGray;
+.menu {
   min-width: 250px;
   width: 35%;
-//   height: 250px;
-  padding: 25px;
+  
+  //   height: 250px;
 
-  .head__avatarImg {
-    width: 100px;
-    border-radius: 50%;
-    margin-bottom: 25px;
+  .head {
+    background-color: base.$themeGray;
+    padding: 25px;
+    border-bottom: 1px solid base.$themeDarkGray;
+
+  }
+  .avatarImg {
+    @include base.avatar;
   }
 
   .search {
-
-    .input-group{
+    .input-group {
       width: 100%;
       margin-bottom: 10px;
 
-      span{
+      span {
         position: absolute;
         padding: 8px 10px;
         min-width: 50px;
@@ -27,22 +29,55 @@
         // text-align: center;
       }
 
-      input{
+      input {
         width: 90%;
         padding: 10px;
         padding-left: 35px;
         // text-align: center;
-        border:none;
+        border: none;
         border: 1px solid base.$themeBlue;
         border-radius: 20px;
-
       }
     }
-      
   }
-}
-.chats{
-    height: 100%;
-    width: 35%;
-    background-color: red;
+
+  .chats {
+    // margin: 25px;
+    width: auto;
+    height: 500px;
+    background-color: base.$themeWhite;
+
+    .chatsHeader {
+      color: base.$themeBlue;
+      margin: 0;
+      padding: 10px;
+      margin-bottom: 25px;
+    }
+    
+    .chat {
+      .messageSection {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        * {
+          padding: 0 10px;
+        }
+        .text {
+          p {
+            margin: 0;
+          }
+        }
+      }
+      border-bottom: 1px solid base.$themeDarkGray;
+      width: auto;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 10px 0;
+      .avatarImg {
+        @include base.avatar($size: 50px);
+        margin: 0;
+      }
+    }
+  }
 }
