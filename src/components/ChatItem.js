@@ -2,8 +2,8 @@ import React from 'react'
 
 function ChatItem({chat}) {
     const date = new Date()
-    const time = new Date(chat?.chat.lastUpdated*1000);
-    let messageTime = date - time - 86400000 < 0 ? time.getHours() +':'+ ('0' + time.getMinutes()).substr(-2) +':' +('0' + time.getSeconds()).substr(-2) : time.getDate() + '/' + (time.getMonth() + 1) + '/' + (time.getYear() + 1900); 
+    const time = new Date(chat?.chat.lastUpdated);
+    let messageTime = date - time < 86400000  ? time.getHours() +':'+ ('0' + time.getMinutes()).substr(-2) +':' +('0' + time.getSeconds()).substr(-2) : time.getDate() + '/' + (time.getMonth() + 1) + '/' + (time.getYear() + 1900); 
     console.log(new Date())
     console.log(chat)
     return (
