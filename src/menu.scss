@@ -5,7 +5,28 @@
   width: 35%;
   z-index: 1;
   //   height: 250px;
-
+  .avatar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    .content {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      span {
+        padding-left: 10px;
+      }
+    }
+    .logout {
+      img {
+        cursor: pointer;
+        width: 25px;
+        height: 25px;
+      }
+    }
+  }
   .head {
     background-color: base.$themeGray;
     padding: 25px;

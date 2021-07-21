@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./login.scss";
+import { auth } from "./firebase";
 import firebase from "firebase";
 
 function Login() {
@@ -16,7 +17,7 @@ function Login() {
         var token = credential.accessToken;
         // The signed-in user info.
         var user = result.user;
-        console.log(result)
+        console.log(result);
       })
       .catch((error) => {
         // Handle Errors here.
@@ -29,7 +30,6 @@ function Login() {
         // ...
       });
   };
-
   return (
     <div className="login">
       <div className="box">

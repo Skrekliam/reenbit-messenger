@@ -3,16 +3,21 @@ import "./App.scss";
 import Login from "./Login";
 import Menu from "./Menu";
 import Message from "./Message";
-import { auth } from "./firebase.js";
+import { auth } from "./firebase";
 
 function App() {
   const [showMenu, setShowMenu] = useState(null);
   const [user, setUser] = useState(null);
-  auth.onAuthStateChanged((curr) => {
-    if (curr) {
-      setUser(curr);
+  useEffect(() => {
+  auth.onAuthStateChanged((authUser) => {
+    if (authUser) {
+      console.log(authUser)
+      setUser(authUser);
+    } else{
+      setUser(authUser)
     }
   });
+},[])
 
   console.log(user);
   const toggleMenu = (caller) => {

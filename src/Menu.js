@@ -1,4 +1,5 @@
 import React from "react";
+import { auth } from "./firebase";
 import "./menu.scss";
 
 function Menu({toggleMenu,user}) {
@@ -9,7 +10,10 @@ function Menu({toggleMenu,user}) {
           <img src="./imgs/close.svg" alt="close"  />
         </button>
         <div className="avatar">
-          <img src="./imgs/avatar.png" alt={user.displayName} className="avatarImg" />{user.displayName}
+          <div className="content">
+          <img src={user.photoURL ?? `./imgs/avatar.png`} alt={user.displayName} className="avatarImg" /><span>{user.displayName}</span>
+          </div>
+          <span className="logout" ><img onClick={() => auth.signOut()} src="./imgs/logout.svg" alt="logout" /></span>
         </div>
         <div className="search">
           <div className="input-group">
