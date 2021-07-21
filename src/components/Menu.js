@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import ChatItem from "./ChatItem";
 import { auth, db } from "./firebase";
 import "./menu.scss";
 
@@ -11,7 +12,7 @@ function Menu({ toggleMenu, user }) {
     console.log(user.uid);
     db.collection("users")
       .doc(user.uid)
-      // .orderBy("timestamp", "desc")
+      // .orderBy("lastUpdated", "desc")
       .get()
       .then((doc) => {
         setChatsList(doc.data().chats);
@@ -22,7 +23,7 @@ console.log(chats)
   useEffect(() => {
     if (!chatsList) return;
     db.collection("chats")
-      // .orderBy("timestamp", "desc")
+      .orderBy("lastUpdated", "desc")
       .onSnapshot((snapshot) => {
         setChats(
           snapshot.docs.map((doc) => {
@@ -80,19 +81,9 @@ console.log(chats)
           </div>
           <div className="time">Jun 12, 2017</div>
         </div> */}
-    {chats?.map(el => { 
-      {console.log(el.chat.user1)}
-        <div className="chat">
-          <div className="messageSection">
-            <img src="./imgs/avatar.png" alt="Avatar" className="avatarImg" />
-            <div className="text">
-              <p className="contact">{el?.chat.user1}</p>
-              <p className="message">{el?.chat.lastMessage}</p>
-            </div>
-          </div>
-          <div className="time">{el?.chat.lastUpdated}</div>
-        </div>
-        })}
+    {chats.map(el => 
+        <ChatItem chat={el} />
+        )}
       </div>
       {/* left side */}
       {/* avatar */}
