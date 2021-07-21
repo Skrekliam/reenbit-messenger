@@ -1,10 +1,10 @@
 import React, { useEffect, useMemo, useState } from "react";
 import "./App.scss";
-import Login from "./Login";
-import Menu from "./Menu";
-import Message from "./Message";
-import { auth } from "./firebase";
-import createMessages from "./CreateChats";
+import Login from "./components/Login";
+import Menu from "./components/Menu";
+import Message from "./components/Message";
+import { auth } from "./components/firebase";
+import createMessages from "./components/CreateChats";
 
 function App() {
   const [showMenu, setShowMenu] = useState(null);
