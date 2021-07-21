@@ -1,19 +1,64 @@
-import React from "react";
-import { auth } from "./firebase";
+import React, { useEffect, useState } from "react";
+import { auth, db } from "./firebase";
 import "./menu.scss";
 
-function Menu({toggleMenu,user}) {
+function Menu({ toggleMenu, user }) {
+  const [chats, setChats] = useState([]);
+  const [chatsList, setChatsList] = useState([]);
+
+  useEffect(() => {
+    if (!user) return;
+    console.log(user.uid);
+    db.collection("users")
+      .doc(user.uid)
+      // .orderBy("timestamp", "desc")
+      .get()
+      .then((doc) => {
+        setChatsList(doc.data().chats);
+      });
+  }, []);
+  console.log(chatsList);
+console.log(chats)
+  useEffect(() => {
+    if (!chatsList) return;
+    db.collection("chats")
+      // .orderBy("timestamp", "desc")
+      .onSnapshot((snapshot) => {
+        setChats(
+          snapshot.docs.map((doc) => {
+            if (chatsList.includes(doc.id)){
+              
+              return {
+                id: doc.id,
+                chat: doc.data(),
+              };}
+          })
+        );
+      });
+  }, [chatsList]);
+
   return (
     <div className="menu">
       <div className="head">
         <button className="back" onClick={() => toggleMenu("btn")}>
-          <img src="./imgs/close.svg" alt="close"  />
+          <img src="./imgs/close.svg" alt="close" />
         </button>
         <div className="avatar">
           <div className="content">
-          <img src={user.photoURL ?? `./imgs/avatar.png`} alt={user.displayName} className="avatarImg" /><span>{user.displayName}</span>
+            <img
+              src={user.photoURL ?? `./imgs/avatar.png`}
+              alt={user.displayName}
+              className="avatarImg"
+            />
+            <span>{user.displayName}</span>
           </div>
-          <span className="logout" ><img onClick={() => auth.signOut()} src="./imgs/logout.svg" alt="logout" /></span>
+          <span className="logout">
+            <img
+              onClick={() => auth.signOut()}
+              src="./imgs/logout.svg"
+              alt="logout"
+            />
+          </span>
         </div>
         <div className="search">
           <div className="input-group">
@@ -25,7 +70,7 @@ function Menu({toggleMenu,user}) {
 
       <div className="chats">
         <h1 className="chatsHeader">Chats</h1>
-        <div className="chat">
+        {/* <div className="chat">
           <div className="messageSection">
             <img src="./imgs/avatar.png" alt="Avatar" className="avatarImg" />
             <div className="text">
@@ -34,18 +79,20 @@ function Menu({toggleMenu,user}) {
             </div>
           </div>
           <div className="time">Jun 12, 2017</div>
-        </div>
-
+        </div> */}
+    {chats?.map(el => { 
+      {console.log(el.chat.user1)}
         <div className="chat">
           <div className="messageSection">
             <img src="./imgs/avatar.png" alt="Avatar" className="avatarImg" />
             <div className="text">
-              <p className="contact">Josefina</p>
-              <p className="message">We are losing money! Quick!</p>
+              <p className="contact">{el?.chat.user1}</p>
+              <p className="message">{el?.chat.lastMessage}</p>
             </div>
           </div>
-          <div className="time">Feb 18, 2017</div>
+          <div className="time">{el?.chat.lastUpdated}</div>
         </div>
+        })}
       </div>
       {/* left side */}
       {/* avatar */}
