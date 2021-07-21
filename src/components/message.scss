@@ -28,6 +28,7 @@
   }
   .message__text {
     max-height: 75vh;
+    height:75vh;
     overflow-x: auto;
     width: 100%;
     display: flex;
@@ -39,38 +40,45 @@
 
       margin: 0;
     }
-    .income {
-      max-width: 70%;
+    .messageItem {
+      max-height: 75vh;
+    overflow-x: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+      .income {
+        max-width: 70%;
 
-      .textSection {
-        display: flex;
-        padding: 25px 25px 0 0;
-        flex-direction: row;
-        justify-content: flex-start;
-        align-items: center;
+        .textSection {
+          display: flex;
+          padding: 25px 25px 0 0;
+          flex-direction: row;
+          justify-content: flex-start;
+          align-items: center;
 
+          p {
+            background-color: base.$messageDark;
+            padding: 10px;
+            color: base.$themeWhite;
+            border-radius: 20px;
+            margin-bottom: 0;
+          }
+        }
+      }
+      .outcome {
+        max-width: 70%;
+        align-self: flex-end;
+        padding-right: 10px;
+        // text-align: right;
+        // position: relative;
+        // right: 0;
         p {
-          background-color: base.$messageDark;
+          width: auto;
           padding: 10px;
-          color: base.$themeWhite;
+          background-color: base.$themeDarkGray;
           border-radius: 20px;
           margin-bottom: 0;
         }
-      }
-    }
-    .outcome {
-      max-width: 70%;
-      align-self: flex-end;
-      padding-right: 10px;
-      // text-align: right;
-      // position: relative;
-      // right: 0;
-      p {
-        width: auto;
-        padding: 10px;
-        background-color: base.$themeDarkGray;
-        border-radius: 20px;
-        margin-bottom: 0;
       }
     }
   }
@@ -120,7 +128,7 @@
 @media screen and (min-width: 900px) {
   .menu {
     //   @include base.showHideMenu;
-    left:0px;
+    left: 0px;
     .head {
       .back {
         display: none !important;
