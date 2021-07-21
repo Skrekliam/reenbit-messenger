@@ -16,7 +16,13 @@ function Message() {
             <div className="messageContext">
               <p className="messageIncome">
                 {/* Quickly come to the meeting room 1B, we have a big server issue */}
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores debitis sint ut, minima quae dicta obcaecati, accusantium at voluptates voluptatibus, architecto quas sed impedit quam quis nam maxime tempora et praesentium veniam modi cupiditate officia omnis! Exercitationem nesciunt nobis atque facere repellendus eligendi eaque. Quia excepturi sit optio nam ratione!
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                Asperiores debitis sint ut, minima quae dicta obcaecati,
+                accusantium at voluptates voluptatibus, architecto quas sed
+                impedit quam quis nam maxime tempora et praesentium veniam modi
+                cupiditate officia omnis! Exercitationem nesciunt nobis atque
+                facere repellendus eligendi eaque. Quia excepturi sit optio nam
+                ratione!
               </p>
               <span className="time">4/22/17, 4:00AM</span>
             </div>
@@ -25,7 +31,12 @@ function Message() {
         <div className="outcome">
           <p className="messageOutcome">
             {/* I'm having breakfest right now, can't you wait for 10 minutes? */}
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel quod culpa id repudiandae, aliquam, aperiam quae suscipit sint, ducimus ullam nobis? Culpa porro distinctio unde optio ipsa qui nobis, aut sunt sit voluptatum laboriosam a laborum facere earum exercitationem perspiciatis reprehenderit maxime fugit ab error consectetur alias. Nobis, culpa officiis!
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel quod
+            culpa id repudiandae, aliquam, aperiam quae suscipit sint, ducimus
+            ullam nobis? Culpa porro distinctio unde optio ipsa qui nobis, aut
+            sunt sit voluptatum laboriosam a laborum facere earum exercitationem
+            perspiciatis reprehenderit maxime fugit ab error consectetur alias.
+            Nobis, culpa officiis!
           </p>
           <span className="time">4/22/17, 4:05AM</span>
         </div>
@@ -33,16 +44,30 @@ function Message() {
           <div className="textSection">
             <img src="./imgs/avatar.png" alt="Avatar" className="avatarImg" />
             <div className="messageContext">
-              <p className="messageIncome">
-              We are losing money! Quick!
-              </p>
+              <p className="messageIncome">We are losing money! Quick!</p>
               <span className="time">4/22/17, 4:10AM</span>
             </div>
           </div>
         </div>
+        <div className="outcome">
+          <p className="messageOutcome">
+            {/* I'm having breakfest right now, can't you wait for 10 minutes? */}
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel quod
+            culpa id repudiandae, aliquam, aperiam quae suscipit sint, ducimus
+            ullam nobis? Culpa porro distinctio unde optio ipsa qui nobis, aut
+            sunt sit voluptatum laboriosam a laborum facere earum exercitationem
+            perspiciatis reprehenderit maxime fugit ab error consectetur alias.
+            Nobis, culpa officiis!
+          </p>
+          <span className="time">4/22/17, 4:05AM</span>
+        </div>
       </div>
-      <div className="message__send"></div>
-      {/* message */}
+      <div className="message__send">
+        <div className="input-group">
+          <button className="icon"><img src="./imgs/paper-plane.svg" alt="send" /></button>
+          <input type="text" placeholder="Type your message" />
+        </div>
+      </div>
     </div>
   );
 }
