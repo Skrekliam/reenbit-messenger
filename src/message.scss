@@ -1,16 +1,26 @@
 @use "base";
 
 .messageBlock {
+  // max-height: 100%;
+
   width: 70%;
   height: 100vh;
   background-color: base.$themeGray;
   border-left: 1px solid base.$themeDarkGray;
 
   .message__header {
+    min-height: 45px;
     display: flex;
     max-height: 7vh;
     padding: 10px 15px;
     border-bottom: 1px solid base.$themeDarkGray;
+    .back {
+      width: 50px;
+      height: 35px;
+      padding: 10px 25px 10px 0;
+      display: none;
+      color: base.$themeBlue;
+    }
     .avatarImg {
       @include base.avatar($size: 50px);
       margin-right: 25px;
@@ -77,31 +87,82 @@
       align-self: center;
       .icon {
         position: absolute;
-        right: 70px;
+        left: 85%;
         // padding: 8px 10px;
         min-width: 50px;
-        padding:5px;
+        padding: 5px;
         // text-align: center;
         border: none;
         background: none;
         cursor: pointer;
 
-        img{
-            width: 25px;
-            font-weight: bold;
+        img {
+          width: 25px;
+          font-weight: bold;
         }
       }
 
       input {
-          font-size: 15px;
-        width: 90%;
+        font-size: 15px;
+        width: 80%;
         padding: 10px;
         padding-right: 50px;
         // text-align: center;
         border: none;
         border: 1px solid base.$themeBlue;
         border-radius: 20px;
+        box-shadow: 0 0 3px #ccc, 0 10px 15px #ebebeb inset;
       }
+    }
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .menu {
+    //   @include base.showHideMenu;
+    left:0px;
+    .head {
+      .back {
+        display: none !important;
+      }
+    }
+  }
+}
+@media screen and (max-width: 900px) {
+  .menu {
+    width: 70%;
+    // @include base.showHideMenu($status: hide)
+  }
+  .messageBlock {
+    width: 100%;
+
+    .message__header {
+      .back {
+        transition: 0.5s ease;
+        display: block;
+        cursor: pointer;
+        &:hover {
+          transform: scale(1.05);
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .message__text {
+    .income {
+      max-width: 100% !important;
+      width: 100%;
+      padding-left: 5px;
+
+      img {
+        display: none;
+      }
+    }
+    .outcome {
+      max-width: 90% !important;
+      width: 90%;
     }
   }
 }

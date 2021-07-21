@@ -1,11 +1,12 @@
 import React from "react";
 import "./message.scss";
 
-function Message() {
+function Message({toggleMenu}) {
   return (
-    <div className="messageBlock">
+    <div className="messageBlock" onClick={() => toggleMenu('page')}>
       {/* chat avatar + name */}
       <div className="message__header">
+        <img src="./imgs/menu.svg" onClick={() => toggleMenu('btn')} alt="Back" className="back" />
         <img src="./imgs/avatar.png" alt="Avatar" className="avatarImg" />{" "}
         <p>Josefina</p>
       </div>

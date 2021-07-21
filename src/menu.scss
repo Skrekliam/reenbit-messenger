@@ -3,7 +3,7 @@
 .menu {
   min-width: 250px;
   width: 35%;
-  
+  z-index: 1;
   //   height: 250px;
 
   .head {
@@ -11,6 +11,22 @@
     padding: 25px;
     border-bottom: 1px solid base.$themeDarkGray;
 
+    .back {
+      transition: 0.5s ease;
+      position: absolute;
+      right: 15px;
+      top: 15px;
+      border: none;
+      background: none;
+      cursor: pointer;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+      img {
+        width: 25px;
+      }
+    }
   }
   .avatarImg {
     @include base.avatar;
@@ -44,7 +60,7 @@
   .chats {
     // margin: 25px;
     width: auto;
-    height: 500px;
+    height: auto;
     background-color: base.$themeWhite;
 
     .chatsHeader {
@@ -53,14 +69,14 @@
       padding: 10px;
       margin-bottom: 25px;
     }
-    
+
     .chat {
-      transition: .1s ease;
-      &:hover{
+      transition: 0.1s ease;
+      &:hover {
         background-color: base.$themeGray;
       }
-      
-      .time{
+
+      .time {
         padding-right: 5px;
       }
       .messageSection {
@@ -71,7 +87,7 @@
           padding: 0 10px;
         }
         .text {
-          .message{
+          .message {
             color: base.$incomeMessage;
           }
           p {
@@ -91,4 +107,36 @@
       }
     }
   }
+}
+
+@keyframes show {
+  from {
+    position: absolute;
+    display: block !important;
+    left: -70%;
+  }
+  to {
+    left: 0px;
+    border-right: 1px solid base.$incomeMessage;
+  }
+}
+
+@keyframes hide {
+  from {
+    left: 0px;
+  }
+  to {
+    box-shadow: none;
+
+    position: absolute;
+    display: none !important;
+    left: -70%;
+  }
+}
+
+.showMenu {
+  @include base.showHideMenu;
+}
+.hideMenu {
+  @include base.showHideMenu($status: hide);
 }
