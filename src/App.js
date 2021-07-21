@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./App.scss";
+import Login from "./Login";
 import Menu from "./Menu";
 import Message from "./Message";
 
@@ -30,9 +31,11 @@ function App() {
  
   return (
     <div className="App">
-      <Menu toggleMenu={toggleMenu}/>
 
-      <Message toggleMenu={toggleMenu}/>
+      <Login />
+      {/* <Menu toggleMenu={toggleMenu}/> */}
+
+      {/* <Message toggleMenu={toggleMenu}/> */}
     </div>
   );
 }
