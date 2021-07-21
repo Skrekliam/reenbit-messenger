@@ -1,7 +1,7 @@
 import React from "react";
 import "./message.scss";
 
-function Message({toggleMenu}) {
+function Message({toggleMenu, user}) {
   return (
     <div className="messageBlock" onClick={() => toggleMenu('page')}>
       {/* chat avatar + name */}

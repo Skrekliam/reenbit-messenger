@@ -1,7 +1,7 @@
 import React from "react";
 import "./menu.scss";
 
-function Menu({toggleMenu}) {
+function Menu({toggleMenu,user}) {
   return (
     <div className="menu">
       <div className="head">
@@ -9,7 +9,7 @@ function Menu({toggleMenu}) {
           <img src="./imgs/close.svg" alt="close"  />
         </button>
         <div className="avatar">
-          <img src="./imgs/avatar.png" alt="Avatar" className="avatarImg" />
+          <img src="./imgs/avatar.png" alt={user.displayName} className="avatarImg" />{user.displayName}
         </div>
         <div className="search">
           <div className="input-group">
