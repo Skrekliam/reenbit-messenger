@@ -5,4 +5,16 @@
     height: 100vh;
     background-color: base.$themeGray;
     border-left: 1px solid base.$themeDarkGray;
+    
+    .message__header{
+
+        .avatarImg{
+            @include base.avatar($size: 50px);
+            margin-right: 25px;
+        }
+        display: flex;
+        max-height: 50px;
+        padding: 10px 15px;
+        border-bottom: 1px solid base.$themeDarkGray;
+    }
 }
