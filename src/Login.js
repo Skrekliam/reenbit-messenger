@@ -4,8 +4,8 @@ import { auth } from "./firebase";
 import firebase from "firebase";
 
 function Login() {
-  const handleGoogleLogin = () => {
-    var provider = new firebase.auth.GoogleAuthProvider();
+  const handleLogin = (prov) => {
+    var provider = prov ==='google' ? new firebase.auth.GoogleAuthProvider(): new firebase.auth.FacebookAuthProvider();
     firebase
       .auth()
       .signInWithPopup(provider)
@@ -27,6 +27,7 @@ function Login() {
         var email = error.email;
         // The firebase.auth.AuthCredential type that was used.
         var credential = error.credential;
+        console.log(error)
         // ...
       });
   };
@@ -34,7 +35,7 @@ function Login() {
     <div className="login">
       <div className="box">
         <h1>You need to LogIn first</h1>
-        <div class="google-btn" onClick={handleGoogleLogin}>
+        <div class="google-btn" onClick={() => handleLogin('google')}>
           <div class="google-icon-wrapper">
             <img
               class="google-icon"
@@ -45,7 +46,7 @@ function Login() {
             <b>Sign in with Google</b>
           </p>
         </div>
-        <button class="fb connect">Sign in with Facebook</button>
+        <button onClick={() => handleLogin('facebook')} class="fb connect">Sign in with Facebook</button>
       </div>
     </div>
   );
