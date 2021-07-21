@@ -10,6 +10,12 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 function App() {
   const [showMenu, setShowMenu] = useState(null);
   const [user, setUser] = useState(null);
+  const [currentChat, setCurrentChat] = useState(null)
+
+  const setCurrChat = (id) => {
+    setCurrentChat(id);
+  }
+
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {
       if (authUser) {
@@ -50,12 +56,12 @@ function App() {
         <>
           <button onClick={() => createMessages(user)}></button>
           <Router>
-          <Menu user={user} toggleMenu={toggleMenu} />
+          <Menu user={user} currentChat={currentChat} toggleMenu={toggleMenu} />
 
           
             <Switch>
               <Route exact path="/chat=:chatId">
-                <Message user={user} toggleMenu={toggleMenu} />
+                <Message setCurrChat={setCurrChat} user={user} toggleMenu={toggleMenu} />
               </Route>
             </Switch>
           </Router>

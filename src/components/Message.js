@@ -4,10 +4,11 @@ import { db } from "./firebase";
 import "./message.scss";
 import MessageItem from "./MessageItem";
 
-function Message({ toggleMenu, user }) {
+function Message({ toggleMenu, user, setCurrChat }) {
   const [messages, setMessages] = useState([]);
   let { chatId } = useParams();
   console.log(chatId)
+  setCurrChat(chatId)
 
   useEffect(() => {
     db.collection("chats")

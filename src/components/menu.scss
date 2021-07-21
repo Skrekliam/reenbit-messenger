@@ -100,10 +100,10 @@
 
     .chat {
       transition: 0.1s ease;
-      &:hover {
+      &:hover,&.active {
         background-color: base.$themeGray;
       }
-
+      
       .time {
         padding-right: 5px;
       }

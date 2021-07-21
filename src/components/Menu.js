@@ -3,7 +3,7 @@ import ChatItem from "./ChatItem";
 import { auth, db } from "./firebase";
 import "./menu.scss";
 
-function Menu({ toggleMenu, user }) {
+function Menu({ toggleMenu, user, currentChat }) {
   const [chats, setChats] = useState([]);
   const [chatsList, setChatsList] = useState([]);
 
@@ -82,7 +82,7 @@ console.log(chats)
           <div className="time">Jun 12, 2017</div>
         </div> */}
     {chats.map(el => 
-        <ChatItem chat={el} />
+        <ChatItem currentChat={currentChat} chat={el} />
         )}
       </div>
       {/* left side */}
