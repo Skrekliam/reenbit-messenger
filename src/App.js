@@ -1,13 +1,14 @@
 import './App.css';
 import Menu from './Menu';
+import Message from './Message';
 
 function App() {
   return (
     <div className="App">
       <Menu />
-      {/* right side */}
-        {/* chat avatar + name */}
-        {/* message */}
+
+      <Message />
+      
     </div>
   );
 }
