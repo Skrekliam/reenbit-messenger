@@ -5,20 +5,21 @@ import Menu from "./components/Menu";
 import Message from "./components/Message";
 import { auth } from "./components/firebase";
 import createMessages from "./components/CreateChats";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 function App() {
   const [showMenu, setShowMenu] = useState(null);
   const [user, setUser] = useState(null);
   useEffect(() => {
-  auth.onAuthStateChanged((authUser) => {
-    if (authUser) {
-      console.log(authUser)
-      setUser(authUser);
-    } else{
-      setUser(authUser)
-    }
-  });
-},[])
+    auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        console.log(authUser);
+        setUser(authUser);
+      } else {
+        setUser(authUser);
+      }
+    });
+  }, []);
 
   console.log(user);
   const toggleMenu = (caller) => {
@@ -47,10 +48,17 @@ function App() {
         <Login />
       ) : (
         <>
-        <button onClick={() => createMessages(user)}></button>
+          <button onClick={() => createMessages(user)}></button>
+          <Router>
           <Menu user={user} toggleMenu={toggleMenu} />
 
-          <Message user={user} toggleMenu={toggleMenu} />
+          
+            <Switch>
+              <Route exact path="/chat=:chatId">
+                <Message user={user} toggleMenu={toggleMenu} />
+              </Route>
+            </Switch>
+          </Router>
         </>
       )}
     </div>

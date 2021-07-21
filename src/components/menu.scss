@@ -84,6 +84,13 @@
     height: auto;
     background-color: base.$themeWhite;
     cursor: pointer;
+    a{
+      text-decoration: none;
+
+    &:focus, &:hover, &:visited, &:link, &:active {
+        text-decoration: none;
+    }
+    }
     .chatsHeader {
       color: base.$themeBlue;
       margin: 0;

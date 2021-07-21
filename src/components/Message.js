@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { db } from "./firebase";
 import "./message.scss";
 import MessageItem from "./MessageItem";
 
 function Message({ toggleMenu, user }) {
   const [messages, setMessages] = useState([]);
+  let { chatId } = useParams();
+  console.log(chatId)
+
   useEffect(() => {
     db.collection("chats")
-      .doc("HSvh9O3zPOe0VaYCsTWD")
+      .doc(chatId)
       .collection("messages")
       .orderBy("timestamp","asc")
       .get()
       .then((res) => setMessages(res.docs.map((el) => el.data())));
-  }, []);
+  }, [chatId]);
   console.log(messages);
 
   return (
