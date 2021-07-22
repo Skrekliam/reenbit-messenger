@@ -2,20 +2,29 @@ import React, { useEffect, useState } from "react";
 import ChatItem from "./ChatItem";
 import { auth, db } from "./firebase";
 import "./menu.scss";
+import SearchInput from "./SearchInput";
 
-function Menu({removeNewMesages, unreadMessages,addNewMessages, toggleMenu, user, currentChat }) {
+function Menu({
+  removeNewMesages,
+  unreadMessages,
+  addNewMessages,
+  toggleMenu,
+  user,
+  currentChat,
+}) {
   const [chats, setChats] = useState([]);
   const [chatsList, setChatsList] = useState([]);
-
+  const [refresh, setRefresh] = useState(false)
   useEffect(() => {
     console.log(unreadMessages);
-    // [...unreadMessages].map(chatId => 
+    // [...unreadMessages].map(chatId =>
     // document.querySelector(`#${chatId}`).classList.add('newMessage')
     // )
-    document.title = [...unreadMessages].length !== 0 ? `${[...unreadMessages].length} new messages` : `Reenbit messenger`;
-  }, [unreadMessages])
-
-
+    document.title =
+      [...unreadMessages].length !== 0
+        ? `${[...unreadMessages].length} new messages`
+        : `Reenbit messenger`;
+  }, [unreadMessages]);
 
   useEffect(() => {
     if (!user) return;
@@ -29,24 +38,33 @@ function Menu({removeNewMesages, unreadMessages,addNewMessages, toggleMenu, user
       });
   }, []);
   console.log(chatsList);
-console.log(chats)
+  console.log(chats);
+
+  const setActiveChats = (els) =>{
+    if(!els){ setRefresh(prev => !prev); return; };
+    setChats([])
+    console.log(els)
+    setChats(els)
+  }
+
+
   useEffect(() => {
     if (!chatsList) return;
     db.collection("chats")
       .orderBy("lastUpdated", "desc")
       .onSnapshot((snapshot) => {
-        setChats(
+        setActiveChats(
           snapshot.docs.map((doc) => {
-            if (chatsList.includes(doc.id)){
-              
+            if (chatsList.includes(doc.id)) {
               return {
                 id: doc.id,
                 chat: doc.data(),
-              };}
+              };
+            }
           })
         );
       });
-  }, [chatsList]);
+  }, [chatsList, refresh]);
 
   return (
     <div className="menu">
@@ -72,10 +90,7 @@ console.log(chats)
           </span>
         </div>
         <div className="search">
-          <div className="input-group">
-            <span className="icon">🔍 </span>
-            <input type="text" placeholder="Search or start new chat" />
-          </div>
+          <SearchInput setActiveChats={setActiveChats} chatsList={chatsList}/>
         </div>
       </div>
 
@@ -91,9 +106,15 @@ console.log(chats)
           </div>
           <div className="time">Jun 12, 2017</div>
         </div> */}
-    {chats.map(el => 
-        <ChatItem unreadMessages={unreadMessages} key={el?.id} currentChat={currentChat} user={user} chat={el} />
-        )}
+        {chats.map((el) => (
+          <ChatItem
+            unreadMessages={unreadMessages}
+            key={el?.id}
+            currentChat={currentChat}
+            user={user}
+            chat={el}
+          />
+        ))}
       </div>
       {/* left side */}
       {/* avatar */}

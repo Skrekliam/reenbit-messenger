@@ -14,7 +14,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [currentChat, setCurrentChat] = useState(null);
   const [unreadMessages, setUnreadMessages] = useState([]);
-
+  
   const addNewMessages = (id) => {
     setUnreadMessages((prev) => [...prev, id]);
   };
