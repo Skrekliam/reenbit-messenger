@@ -3,7 +3,7 @@ import convertTime from "./ConvertTime";
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-function ChatItem({ chat,currentChat }) {
+function ChatItem({ chat,currentChat, user }) {
   // const date = new Date()
   console.log('chat time ', chat?.chat.lastUpdated?.seconds)
   const messageTime = convertTime(chat?.chat.lastUpdated?.seconds  ?? 'now' );
@@ -21,7 +21,7 @@ function ChatItem({ chat,currentChat }) {
           <img src="./imgs/avatar.png" alt="Avatar" className="avatarImg" />
           <div className="text">
             <p className="contact">{chat?.chat.user1}</p>
-            <p className="message">
+            <p className="message">{chat?.chat.lastSender === user.displayName ? 'You: ' : ''}
               {chat?.chat.lastMessage.length > 81
                 ? chat?.chat.lastMessage.slice(0, 81) + "..."
                 : chat?.chat.lastMessage}

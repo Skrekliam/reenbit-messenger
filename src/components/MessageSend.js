@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { db } from "./firebase";
 import firebase from "firebase";
+import generateMessage from "./GenerateMessage";
 
-function MessageSend({ user, chatId }) {
+function MessageSend({ recepient, user, chatId }) {
   const [message, setMessage] = useState("");
   const handleSend = () => {
     db.collection("chats")
@@ -10,6 +11,7 @@ function MessageSend({ user, chatId }) {
       .update({
         lastMessage: message,
         lastUpdated: firebase.firestore.FieldValue.serverTimestamp(),
+        lastSender: user.displayName
       })
       .then(() =>
         db.collection("chats").doc(chatId).collection("messages").add({
@@ -18,7 +20,10 @@ function MessageSend({ user, chatId }) {
           timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         })
       )
-      .then(() => setMessage(""));
+      .then(() =>{
+        setMessage("")
+        generateMessage(chatId,recepient)
+      });
   };
   return (
     <div className="input-group">

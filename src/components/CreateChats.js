@@ -15,6 +15,7 @@ export default async function createMessages(user) {
     {
       user1: "Alice Freeman",
       user2: user.displayName,
+      lastSender: "Alice Freeman",
       lastMessage: msg1,
       lastUpdated: 1 * 1000 * 60,
       messages: [
@@ -42,6 +43,7 @@ export default async function createMessages(user) {
       user1: "Josefina",
       user2: user.displayName,
       lastMessage: msg2,
+      lastSender: "Josefina",
       lastUpdated: 1000 * 60 * 52,
       messages: [
         {
@@ -67,6 +69,7 @@ export default async function createMessages(user) {
     {
       user1: "Velazquez",
       user2: user.displayName,
+      lastSender: "Velazquez",
       lastMessage: msg3,
       lastUpdated: 1000 * 60 * 22 * 24,
       messages: [
@@ -103,6 +106,7 @@ export default async function createMessages(user) {
         user1: el.user1,
         user2: user.displayName,
         lastMessage: el.lastMessage,
+        lastSender: el.lastSender,
         lastUpdated: new Date(new Date() - el.lastUpdated),
       })
       .then((res) => {

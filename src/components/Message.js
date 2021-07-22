@@ -59,7 +59,7 @@ function Message({ toggleMenu, user, setCurrChat }) {
         ))}
       </div>
       <div className="message__send">
-        <MessageSend user={user} chatId={chatId} />
+        <MessageSend recepient={recepient} user={user} chatId={chatId} />
       </div>
     </div>
   );

@@ -82,7 +82,7 @@ console.log(chats)
           <div className="time">Jun 12, 2017</div>
         </div> */}
     {chats.map(el => 
-        <ChatItem currentChat={currentChat} chat={el} />
+        <ChatItem currentChat={currentChat} user={user} chat={el} />
         )}
       </div>
       {/* left side */}

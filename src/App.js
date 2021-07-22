@@ -6,6 +6,7 @@ import Message from "./components/Message";
 import { auth } from "./components/firebase";
 import createMessages from "./components/CreateChats";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import generateMessage from "./components/GenerateMessage";
 
 function App() {
   const [showMenu, setShowMenu] = useState(null);
@@ -54,7 +55,7 @@ function App() {
         <Login />
       ) : (
         <>
-          <button onClick={() => createMessages(user)}></button>
+          <button onClick={() => createMessages(user)}>Create messages</button>
           <Router>
           <Menu user={user} currentChat={currentChat} toggleMenu={toggleMenu} />
 
