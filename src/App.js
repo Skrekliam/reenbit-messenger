@@ -12,6 +12,16 @@ function App() {
   const [showMenu, setShowMenu] = useState(null);
   const [user, setUser] = useState(null);
   const [currentChat, setCurrentChat] = useState(null)
+  const [unreadMessages, setUnreadMessages] = useState([]);
+
+  const addNewMessages = (id) => {
+    setUnreadMessages(prev => [...prev, id]);
+  } 
+
+  const removeNewMesages = (id) => {
+    let tempArr = [...unreadMessages]
+    setUnreadMessages(tempArr.filter(el => el !== id))
+  }
 
   const setCurrChat = (id) => {
     setCurrentChat(id);
@@ -57,12 +67,12 @@ function App() {
         <>
           <button onClick={() => createMessages(user)}>Create messages</button>
           <Router>
-          <Menu user={user} currentChat={currentChat} toggleMenu={toggleMenu} />
+          <Menu unreadMessages={unreadMessages}  user={user} currentChat={currentChat} toggleMenu={toggleMenu} />
 
           
             <Switch>
               <Route exact path="/chat=:chatId">
-                <Message setCurrChat={setCurrChat} user={user} toggleMenu={toggleMenu} />
+                <Message addNewMessages={addNewMessages} removeNewMesages={removeNewMesages} setCurrChat={setCurrChat} user={user} toggleMenu={toggleMenu} />
               </Route>
             </Switch>
           </Router>
@@ -72,4 +82,4 @@ function App() {
   );
 }
 
-export default App;
+export default App; 

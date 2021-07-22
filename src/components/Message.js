@@ -5,13 +5,13 @@ import "./message.scss";
 import MessageItem from "./MessageItem";
 import MessageSend from "./MessageSend";
 
-function Message({ toggleMenu, user, setCurrChat }) {
+function Message({addNewMessages, toggleMenu, user, setCurrChat,removeNewMesages }) {
   const [messages, setMessages] = useState([]);
   const [recepient, setRecepient] = useState("");
   let { chatId } = useParams();
   console.log(chatId);
   setCurrChat(chatId);
-
+  
   useEffect(() => {
     db.collection("chats")
       .doc(chatId)
@@ -20,6 +20,7 @@ function Message({ toggleMenu, user, setCurrChat }) {
         let { user1, user2 } = doc.data();
         setRecepient(user.displayName !== user1 ? user1 : user2);
       });
+      removeNewMesages(chatId);
   }, [chatId]);
 
   useEffect(() => {
@@ -49,6 +50,7 @@ function Message({ toggleMenu, user, setCurrChat }) {
   return (
     <div className="messageBlock" onClick={() => toggleMenu("page")}>
       {/* chat avatar + name */}
+      
       <div className="message__header">
         <img
           src="./imgs/menu.svg"
@@ -61,11 +63,11 @@ function Message({ toggleMenu, user, setCurrChat }) {
       </div>
       <div className="message__text">
         {messages?.map((message) => (
-          <MessageItem message={message} user={user} />
+          <MessageItem key={message.timestamp?.seconds} message={message} user={user} />
         ))}
       </div>
       <div className="message__send">
-        <MessageSend recepient={recepient} user={user} chatId={chatId} />
+        <MessageSend addNewMessages={addNewMessages} recepient={recepient} user={user} chatId={chatId} />
       </div>
     </div>
   );

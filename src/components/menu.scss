@@ -106,6 +106,10 @@
 
     .chat {
       transition: 0.1s ease;
+      &.newMessage{
+        background-color: base.$newMessage;
+        font-weight: bold;
+      }
       &:hover,&.active {
         background-color: base.$themeGray;
       }

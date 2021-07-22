@@ -3,7 +3,7 @@ import { db } from "./firebase";
 import firebase from "firebase";
 import generateMessage from "./GenerateMessage";
 
-function MessageSend({ recepient, user, chatId }) {
+function MessageSend({ recepient, user, chatId,addNewMessages }) {
   const [message, setMessage] = useState("");
   const handleSend = () => {
     db.collection("chats")
@@ -22,7 +22,7 @@ function MessageSend({ recepient, user, chatId }) {
       )
       .then(() =>{
         setMessage("")
-        generateMessage(chatId,recepient)
+        generateMessage(chatId,recepient,addNewMessages)
       });
   };
   return (

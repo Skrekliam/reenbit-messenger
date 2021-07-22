@@ -3,9 +3,19 @@ import ChatItem from "./ChatItem";
 import { auth, db } from "./firebase";
 import "./menu.scss";
 
-function Menu({ toggleMenu, user, currentChat }) {
+function Menu({removeNewMesages, unreadMessages,addNewMessages, toggleMenu, user, currentChat }) {
   const [chats, setChats] = useState([]);
   const [chatsList, setChatsList] = useState([]);
+
+  useEffect(() => {
+    console.log(unreadMessages);
+    // [...unreadMessages].map(chatId => 
+    // document.querySelector(`#${chatId}`).classList.add('newMessage')
+    // )
+    document.title = [...unreadMessages].length !== 0 ? `${[...unreadMessages].length} new messages` : `Reenbit messenger`;
+  }, [unreadMessages])
+
+
 
   useEffect(() => {
     if (!user) return;
@@ -82,7 +92,7 @@ console.log(chats)
           <div className="time">Jun 12, 2017</div>
         </div> */}
     {chats.map(el => 
-        <ChatItem currentChat={currentChat} user={user} chat={el} />
+        <ChatItem unreadMessages={unreadMessages} key={el?.id} currentChat={currentChat} user={user} chat={el} />
         )}
       </div>
       {/* left side */}

@@ -3,7 +3,7 @@ import convertTime from "./ConvertTime";
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-function ChatItem({ chat,currentChat, user }) {
+function ChatItem({unreadMessages, chat,currentChat, user }) {
   // const date = new Date()
   console.log('chat time ', chat?.chat.lastUpdated?.seconds)
   const messageTime = convertTime(chat?.chat.lastUpdated?.seconds  ?? 'now' );
@@ -12,10 +12,10 @@ function ChatItem({ chat,currentChat, user }) {
   // console.log(chat)
   return (
     <Link to={`/chat=${chat?.id}`}>
-      <div
+      <div id={chat?.id}
         className={`chat ${
           chat?.id === currentChat ? "active" : ""
-        }`}
+        } ${unreadMessages.includes(chat?.id) ? "newMessage" : ""}`}
       >
         <div className="messageSection">
           <img src="./imgs/avatar.png" alt="Avatar" className="avatarImg" />
