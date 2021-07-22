@@ -21,23 +21,29 @@ function Message({ toggleMenu, user, setCurrChat }) {
         setRecepient(user.displayName !== user1 ? user1 : user2);
       });
   }, [chatId]);
-  
-  useEffect(() => {
-    if(!messages) return
-    let scrollItems = document.getElementsByClassName("messageItem");
-    scrollItems[scrollItems.length - 1]?.scrollIntoView({block: "center", behavior: "smooth"});
-  },[messages])
 
   useEffect(() => {
-    db.collection("chats")
+    if (!messages) return;
+    let scrollItems = document.getElementsByClassName("messageItem");
+    scrollItems[scrollItems.length - 1]?.scrollIntoView({
+      block: "center",
+      behavior: "smooth",
+    });
+  }, [messages]);
+
+  useEffect(() => {
+    let unsubscribe = db
+      .collection("chats")
       .doc(chatId)
       .collection("messages")
       .orderBy("timestamp", "asc")
       .onSnapshot((snapshot) => {
         setMessages(snapshot.docs.map((el) => el.data()));
       });
+    return () => unsubscribe();
   }, [chatId]);
 
+  
   console.log(messages);
 
   return (

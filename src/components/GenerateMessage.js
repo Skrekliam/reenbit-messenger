@@ -17,11 +17,22 @@ export default async function generateMessage(chatId, sender) {
         lastSender: sender,
       })
       .then(() =>
-        db.collection("chats").doc(chatId).collection("messages").add({
-          message: message,
-          sender: sender,
-          timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-        })
+        db
+          .collection("chats")
+          .doc(chatId)
+          .collection("messages")
+          .add({
+            message: message,
+            sender: sender,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+          })
+          .then(() => {
+            var audio = new Audio("./sounds/notification_sound.mp3");
+            audio.play();
+          })
       );
-  }, 10000 + Math.random() * 1000 * 5);
+  }, 
+   Math.random() * 1000 * 5
+//   1000
+  );
 }
