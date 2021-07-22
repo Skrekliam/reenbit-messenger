@@ -76,6 +76,9 @@
         border: none;
         border: 1px solid base.$themeBlue;
         border-radius: 20px;
+        &:focus{
+          outline: none;
+        }
       }
     }
   }
@@ -87,7 +90,7 @@
     height: auto;
     max-height: 73vh;
     background-color: base.$themeWhite;
-    cursor: pointer;
+    
     @include base.scrollbars(.5em, slategray);
 
     a{
@@ -106,6 +109,7 @@
 
     .chat {
       transition: 0.1s ease;
+      cursor: pointer;
       &.newMessage{
         background-color: base.$newMessage;
         font-weight: bold;

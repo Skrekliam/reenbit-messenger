@@ -119,6 +119,10 @@
         border: 1px solid base.$themeBlue;
         border-radius: 20px;
         box-shadow: 0 0 3px #ccc, 0 10px 15px #ebebeb inset;
+
+        &:focus{
+          outline: none;
+        }
       }
     }
   }

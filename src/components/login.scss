@@ -5,6 +5,7 @@ $google-blue: #4285f4;
 $button-active-blue: #1669f2;
 
 .login {
+  
   width: 100%;
   height: 100vh;
   display: flex;
@@ -23,6 +24,8 @@ $button-active-blue: #1669f2;
 }
 
 .google-btn {
+  transition: .1s ease-in-out;
+  cursor: pointer;
   margin-bottom: 10px;
   width: 184px;
   height: 42px;
@@ -61,6 +64,8 @@ $button-active-blue: #1669f2;
   }
 }
 button.fb {
+  transition: .5s ease-in-out;
+  cursor: pointer;
   font-family: Lucida Grande, Helvetica Neue, Helvetica, Arial, sans-serif;
   display: inline-block;
   font-size: 14px;
@@ -72,6 +77,9 @@ button.fb {
   line-height: 1;
   position: relative;
   border-radius: 5px;
+  &:hover {
+    box-shadow: 0 0 6px #3a5a97;
+  }
 }
 
 .connect:before {
