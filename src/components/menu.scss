@@ -4,6 +4,8 @@
   min-width: 250px;
   width: 35%;
   z-index: 1;
+  // max-height: 100vh;
+  
   //   height: 250px;
   .avatar {
     display: flex;
@@ -31,7 +33,7 @@
     background-color: base.$themeGray;
     padding: 25px;
     border-bottom: 1px solid base.$themeDarkGray;
-
+    height:20vh;
     .back {
       transition: 0.5s ease;
       position: absolute;
@@ -79,11 +81,15 @@
   }
 
   .chats {
+    overflow-y: auto;
     // margin: 25px;
     width: auto;
     height: auto;
+    max-height: 73vh;
     background-color: base.$themeWhite;
     cursor: pointer;
+    @include base.scrollbars(.5em, slategray);
+
     a{
       text-decoration: none;
 

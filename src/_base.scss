@@ -1,23 +1,43 @@
 $themeGray: #dfdfdf;
 $themeDarkGray: #cfcfcf;
 $themeWhite: #ffffff;
-$themeBlue: #83BED2;
-$messageDark: #3C4153;
+$themeBlue: #83bed2;
+$messageDark: #3c4153;
 $incomeMessage: #69696b;
 
-
-
-@mixin avatar($size: 75px){
-    width: $size;
+@mixin scrollbars($size, $foreground-color, $background-color: mix($foreground-color, white,  50%)) {
+  // For Google Chrome
+  &::-webkit-scrollbar {
+    width:  $size;
     height: $size;
-    border-radius: 50%;
-    margin-bottom: 25px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $foreground-color;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $background-color;
+  }
+
+  // For Internet Explorer
+  & {
+    scrollbar-face-color: $foreground-color;
+    scrollbar-track-color: $background-color;
+  }
 }
 
-@mixin showHideMenu($status: show){
-  animation-duration: 1s ;
-  animation-name: $status ;
-  animation-iteration-count: 1 ;
-  animation-timing-function: cubic-bezier(0.35, 1.21, 1, 1) ;
-  animation-fill-mode: forwards ;
+@mixin avatar($size: 75px) {
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  margin-bottom: 25px;
+}
+
+@mixin showHideMenu($status: show) {
+  animation-duration: 1s;
+  animation-name: $status;
+  animation-iteration-count: 1;
+  animation-timing-function: cubic-bezier(0.35, 1.21, 1, 1);
+  animation-fill-mode: forwards;
 }
