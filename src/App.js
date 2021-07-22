@@ -7,25 +7,26 @@ import { auth } from "./components/firebase";
 import createMessages from "./components/CreateChats";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import generateMessage from "./components/GenerateMessage";
+import NoChat from "./components/NoChat";
 
 function App() {
   const [showMenu, setShowMenu] = useState(null);
   const [user, setUser] = useState(null);
-  const [currentChat, setCurrentChat] = useState(null)
+  const [currentChat, setCurrentChat] = useState(null);
   const [unreadMessages, setUnreadMessages] = useState([]);
 
   const addNewMessages = (id) => {
-    setUnreadMessages(prev => [...prev, id]);
-  } 
+    setUnreadMessages((prev) => [...prev, id]);
+  };
 
   const removeNewMesages = (id) => {
-    let tempArr = [...unreadMessages]
-    setUnreadMessages(tempArr.filter(el => el !== id))
-  }
+    let tempArr = [...unreadMessages];
+    setUnreadMessages(tempArr.filter((el) => el !== id));
+  };
 
   const setCurrChat = (id) => {
     setCurrentChat(id);
-  }
+  };
 
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {
@@ -65,15 +66,26 @@ function App() {
         <Login />
       ) : (
         <>
-          <button onClick={() => createMessages(user)}>Create messages</button>
+          {/* <button onClick={() => createMessages(user)}>Create messages</button> */}
           <Router>
-          <Menu unreadMessages={unreadMessages}  user={user} currentChat={currentChat} toggleMenu={toggleMenu} />
+            <Menu
+              unreadMessages={unreadMessages}
+              user={user}
+              currentChat={currentChat}
+              toggleMenu={toggleMenu}
+            />
 
-          
             <Switch>
               <Route exact path="/chat=:chatId">
-                <Message addNewMessages={addNewMessages} removeNewMesages={removeNewMesages} setCurrChat={setCurrChat} user={user} toggleMenu={toggleMenu} />
+                <Message
+                  addNewMessages={addNewMessages}
+                  removeNewMesages={removeNewMesages}
+                  setCurrChat={setCurrChat}
+                  user={user}
+                  toggleMenu={toggleMenu}
+                />
               </Route>
+              <NoChat toggleMenu={toggleMenu} />
             </Switch>
           </Router>
         </>
@@ -82,4 +94,4 @@ function App() {
   );
 }
 
-export default App; 
+export default App;

@@ -1,6 +1,5 @@
 import { db } from "./firebase";
 import firebase from "firebase";
-import messageHandler from "./MessageHandler";
 
 export default async function generateMessage(chatId, sender, addNewMessages) {
   const url = "https://api.chucknorris.io/jokes/random";
