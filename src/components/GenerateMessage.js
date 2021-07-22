@@ -35,7 +35,7 @@ export default async function generateMessage(chatId, sender, addNewMessages) {
             })
         );
     },
-    Math.random() * 1000 * 5
+    10000 + Math.random() * 1000 * 5
     //   1000
   );
 }

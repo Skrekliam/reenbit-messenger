@@ -14,7 +14,7 @@ function Menu({
 }) {
   const [chats, setChats] = useState([]);
   const [chatsList, setChatsList] = useState([]);
-  const [refresh, setRefresh] = useState(false)
+  const [refresh, setRefresh] = useState(false);
   useEffect(() => {
     console.log(unreadMessages);
     // [...unreadMessages].map(chatId =>
@@ -32,21 +32,24 @@ function Menu({
     db.collection("users")
       .doc(user.uid)
       // .orderBy("lastUpdated", "desc")
-      .get()
-      .then((doc) => {
-        setChatsList(doc.data().chats);
+      // .get()
+      .onSnapshot((doc) => {
+      // .then(() => {
+        if (doc.exists) setChatsList(doc?.data()?.chats);
       });
   }, []);
   console.log(chatsList);
   console.log(chats);
 
-  const setActiveChats = (els) =>{
-    if(!els){ setRefresh(prev => !prev); return; };
-    setChats([])
-    console.log(els)
-    setChats(els)
-  }
-
+  const setActiveChats = (els) => {
+    if (!els) {
+      setRefresh((prev) => !prev);
+      return;
+    }
+    setChats([]);
+    console.log(els);
+    setChats(els);
+  };
 
   useEffect(() => {
     if (!chatsList) return;
@@ -90,7 +93,7 @@ function Menu({
           </span>
         </div>
         <div className="search">
-          <SearchInput setActiveChats={setActiveChats} chatsList={chatsList}/>
+          <SearchInput setActiveChats={setActiveChats} chatsList={chatsList} />
         </div>
       </div>
 

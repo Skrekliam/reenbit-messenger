@@ -17,16 +17,17 @@ function Message({
   let { chatId } = useParams();
   console.log(chatId);
   setCurrChat(chatId);
- 
+
   useEffect(() => {
     db.collection("chats")
       .doc(chatId)
-      .get()
-      .then((doc) => {
-        let { user1, user2 } = doc.data();
+      .onSnapshot((snapshot) => {
+      // .then((doc) => {
+        if (!snapshot.exists) return;
+        let { user1, user2 } = snapshot.data();
         setRecepient(user.displayName !== user1 ? user1 : user2);
       });
-      removeNewMesages(chatId)
+    removeNewMesages(chatId);
   }, [chatId]);
 
   useEffect(() => {
@@ -52,11 +53,8 @@ function Message({
 
   console.log(messages);
 
- 
-
-
   return (
-    <div  className="messageBlock" onClick={() => toggleMenu("page")}>
+    <div className="messageBlock" onClick={() => toggleMenu("page")}>
       {/* chat avatar + name */}
 
       <div className="message__header">
