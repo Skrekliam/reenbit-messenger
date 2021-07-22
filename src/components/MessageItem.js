@@ -15,7 +15,7 @@ function MessageItem({message, user}) {
               <p className="messageIncome">
                 {message.message}
               </p>
-              <span className="time">{convertTime(message.timestamp.seconds)}</span>
+              <span className="time">{convertTime(message?.timestamp?.seconds)}</span>
             </div>
           </div>
         </div>
@@ -25,7 +25,7 @@ function MessageItem({message, user}) {
             {/* I'm having breakfest right now, can't you wait for 10 minutes? */}
             {message.message}
           </p>
-          <span className="time">{convertTime(message.timestamp.seconds *1000 ?? message.timestamp)}</span>
+          <span className="time">{convertTime(message?.timestamp?.seconds )}</span>
         </div>
             )}
         </div>

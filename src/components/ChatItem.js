@@ -5,8 +5,8 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 function ChatItem({ chat,currentChat }) {
   // const date = new Date()
-  console.log('chat time ', chat?.chat.lastUpdated.seconds)
-  const messageTime = convertTime(chat?.chat.lastUpdated.seconds * 1000 );
+  console.log('chat time ', chat?.chat.lastUpdated?.seconds)
+  const messageTime = convertTime(chat?.chat.lastUpdated?.seconds  ?? 'now' );
   // let messageTime = date - time < 86400000  ? time.getHours() +':'+ ('0' + time.getMinutes()).substr(-2) +':' +('0' + time.getSeconds()).substr(-2) : time.getDate() + '/' + (time.getMonth() + 1) + '/' + (time.getYear() + 1900);
   // console.log(new Date())
   // console.log(chat)

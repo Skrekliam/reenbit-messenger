@@ -7,30 +7,36 @@ import MessageSend from "./MessageSend";
 
 function Message({ toggleMenu, user, setCurrChat }) {
   const [messages, setMessages] = useState([]);
-  const [recepient, setRecepient] = useState("")
+  const [recepient, setRecepient] = useState("");
   let { chatId } = useParams();
-  console.log(chatId)
-  setCurrChat(chatId)
+  console.log(chatId);
+  setCurrChat(chatId);
 
   useEffect(() => {
     db.collection("chats")
       .doc(chatId)
-      .get().then(doc => {
-        let {user1, user2} = doc.data();
-        setRecepient( user.displayName !== user1 ? user1 : user2)
-      })
-  }, [chatId])
-
+      .get()
+      .then((doc) => {
+        let { user1, user2 } = doc.data();
+        setRecepient(user.displayName !== user1 ? user1 : user2);
+      });
+  }, [chatId]);
+  
+  useEffect(() => {
+    if(!messages) return
+    let scrollItems = document.getElementsByClassName("messageItem");
+    scrollItems[scrollItems.length - 1]?.scrollIntoView({block: "center", behavior: "smooth"});
+  },[messages])
 
   useEffect(() => {
     db.collection("chats")
       .doc(chatId)
       .collection("messages")
-      .orderBy("timestamp","asc")
-      .get()
-      .then((res) => setMessages(res.docs.map((el) => el.data())));
+      .orderBy("timestamp", "asc")
+      .onSnapshot((snapshot) => {
+        setMessages(snapshot.docs.map((el) => el.data()));
+      });
   }, [chatId]);
-
 
   console.log(messages);
 
@@ -49,7 +55,7 @@ function Message({ toggleMenu, user, setCurrChat }) {
       </div>
       <div className="message__text">
         {messages?.map((message) => (
-          <MessageItem message={message} user={user}/>
+          <MessageItem message={message} user={user} />
         ))}
       </div>
       <div className="message__send">
