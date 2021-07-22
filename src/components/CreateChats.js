@@ -103,7 +103,7 @@ export default async function createMessages(user) {
         user1: el.user1,
         user2: user.displayName,
         lastMessage: el.lastMessage,
-        lastUpdated: new Date() - el.lastUpdated,
+        lastUpdated: new Date(new Date() - el.lastUpdated),
       })
       .then((res) => {
         el.messages.map((elMessage) => {
@@ -113,7 +113,7 @@ export default async function createMessages(user) {
             .set({
               message: elMessage.message,
               sender: elMessage.sender,
-              timestamp: new Date() - elMessage.timestamp,
+              timestamp: new Date(new Date() - elMessage.timestamp),
             });
         });
         db.collection("users")

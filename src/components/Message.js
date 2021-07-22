@@ -3,12 +3,24 @@ import { useParams } from "react-router-dom";
 import { db } from "./firebase";
 import "./message.scss";
 import MessageItem from "./MessageItem";
+import MessageSend from "./MessageSend";
 
 function Message({ toggleMenu, user, setCurrChat }) {
   const [messages, setMessages] = useState([]);
+  const [recepient, setRecepient] = useState("")
   let { chatId } = useParams();
   console.log(chatId)
   setCurrChat(chatId)
+
+  useEffect(() => {
+    db.collection("chats")
+      .doc(chatId)
+      .get().then(doc => {
+        let {user1, user2} = doc.data();
+        setRecepient( user.displayName !== user1 ? user1 : user2)
+      })
+  }, [chatId])
+
 
   useEffect(() => {
     db.collection("chats")
@@ -18,6 +30,8 @@ function Message({ toggleMenu, user, setCurrChat }) {
       .get()
       .then((res) => setMessages(res.docs.map((el) => el.data())));
   }, [chatId]);
+
+
   console.log(messages);
 
   return (
@@ -31,7 +45,7 @@ function Message({ toggleMenu, user, setCurrChat }) {
           className="back"
         />
         <img src="./imgs/avatar.png" alt="Avatar" className="avatarImg" />{" "}
-        <p>Josefina</p>
+        <p>{recepient}</p>
       </div>
       <div className="message__text">
         {messages?.map((message) => (
@@ -39,12 +53,7 @@ function Message({ toggleMenu, user, setCurrChat }) {
         ))}
       </div>
       <div className="message__send">
-        <div className="input-group">
-          <button className="icon">
-            <img src="./imgs/paper-plane.svg" alt="send" />
-          </button>
-          <input type="text" placeholder="Type your message" />
-        </div>
+        <MessageSend user={user} chatId={chatId} />
       </div>
     </div>
   );

@@ -23,7 +23,7 @@ console.log(chats)
   useEffect(() => {
     if (!chatsList) return;
     db.collection("chats")
-      .orderBy("lastUpdated", "desc")
+      // .orderBy("lastUpdated.seconds", "desc")
       .onSnapshot((snapshot) => {
         setChats(
           snapshot.docs.map((doc) => {
