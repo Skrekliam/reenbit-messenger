@@ -13,7 +13,7 @@ function NoChat({toggleMenu}) {
           className="back"
         />
       </div>
-      <h1>Select chat to start</h1>
+      <h1 className="noChat">Select chat to start</h1>
     </div>
   );
 }

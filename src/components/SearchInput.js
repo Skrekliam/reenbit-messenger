@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { db } from "./firebase";
 
-function SearchInput({ chatsList, setActiveChats }) {
+function SearchInput({toggleRefresh, searchInput, chatsList, setActiveChats }) {
   const [query, setQuery] = useState("");
 
 //   const handleSearch = () => {
 
 useEffect(() => {
     let tmpArr = [];
-    if (query.length < 1) { setActiveChats(false); return;}
+    if (query.length < 1) { toggleRefresh();
+      //  setActiveChats(false);
+        return;}
     chatsList?.map((chatId) =>
       db
         .collection("chats")
@@ -54,9 +56,11 @@ useEffect(() => {
       <input
         type="text"
         value={query}
+        ref={searchInput}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search in messages"
       />
+      {/* <span onClick={()=>{ toggleRefresh();}}>Clear</span> */}
     </div>
   );
 }

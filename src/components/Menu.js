@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import ChatItem from "./ChatItem";
 import { auth, db } from "./firebase";
 import "./menu.scss";
@@ -15,6 +16,9 @@ function Menu({
   const [chats, setChats] = useState([]);
   const [chatsList, setChatsList] = useState([]);
   const [refresh, setRefresh] = useState(false);
+
+  const searchInput = useRef("")
+
   useEffect(() => {
     console.log(unreadMessages);
     // [...unreadMessages].map(chatId =>
@@ -34,7 +38,7 @@ function Menu({
       // .orderBy("lastUpdated", "desc")
       // .get()
       .onSnapshot((doc) => {
-      // .then(() => {
+        // .then(() => {
         if (doc.exists) setChatsList(doc?.data()?.chats);
       });
   }, []);
@@ -46,29 +50,39 @@ function Menu({
       setRefresh((prev) => !prev);
       return;
     }
-    setChats([]);
+    setChats([])
+    
     console.log(els);
     setChats(els);
   };
 
   useEffect(() => {
+    
     if (!chatsList) return;
+    let tmpArr = [];
     db.collection("chats")
       .orderBy("lastUpdated", "desc")
       .onSnapshot((snapshot) => {
-        setActiveChats(
-          snapshot.docs.map((doc) => {
-            if (chatsList.includes(doc.id)) {
-              return {
+        snapshot.docs.map((doc) => {
+          console.log(doc.id)
+          if (chatsList.includes(doc.id)) {
+            return (tmpArr = [
+              ...tmpArr,
+              {
                 id: doc.id,
                 chat: doc.data(),
-              };
-            }
-          })
-        );
-      });
+              },
+            ]);
+          }
+        
+          setActiveChats(tmpArr)
+        });
+      })
+      
   }, [chatsList, refresh]);
-
+ const toggleRefresh = () => {
+   setRefresh(prev => !prev);
+ }
   return (
     <div className="menu">
       <div className="head">
@@ -84,16 +98,18 @@ function Menu({
             />
             <span>{user.displayName}</span>
           </div>
-          <span className="logout">
+          
+          <Link to="/" className="logout">
             <img
               onClick={() => auth.signOut()}
               src="./imgs/logout.svg"
               alt="logout"
             />
-          </span>
+          </Link>
         </div>
         <div className="search">
-          <SearchInput setActiveChats={setActiveChats} chatsList={chatsList} />
+          <SearchInput toggleRefresh={toggleRefresh} searchInput={searchInput} setActiveChats={setActiveChats} chatsList={chatsList} />
+          
         </div>
       </div>
 

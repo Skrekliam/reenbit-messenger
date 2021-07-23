@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { db } from "./firebase";
 import "./message.scss";
 import MessageItem from "./MessageItem";
@@ -66,6 +66,17 @@ function Message({
         />
         <img src="./imgs/avatar.png" alt="Avatar" className="avatarImg" />{" "}
         <p>{recepient}</p>
+        <div className="closeChat">
+        <Link to="/" >
+            <img
+              // onClick={() => auth.signOut()}
+              src="./imgs/close.svg"
+              // className="closeChat"
+              
+              alt="close"
+            />
+          </Link>
+          </div>
       </div>
       <div className="message__text">
         {messages?.map((message) => (
